@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app" ng-controller="MainCtrl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,6 +61,10 @@
 <!-- application -->
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/app.js')}"></script>
 <!-- /application -->
+
+<!-- controllers -->
+<script type="text/javascript" src="${request.static_url('alexandria:static/js/controllers/MainCtrl.js')}"></script>
+<!-- /controllers -->
 <!-- <script type="text/javascript" src="${request.static_url('alexandria:static/jquery-2.0.3.min.js')}"></script> -->
 </body>
 </html>
