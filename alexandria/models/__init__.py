@@ -1,1 +1,1 @@
-from meta import DBSession, Base
+from .meta import DBSession, Base
