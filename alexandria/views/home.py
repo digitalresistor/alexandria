@@ -4,8 +4,8 @@ from pyramid.view import (
         )
 
 # Always send the default index.html
-@notfound_view_config(renderer='templates/index.mako')
-@view_config(renderer='templates/index.mako')
+@notfound_view_config(renderer='templates/index.mako', accept='text/html')
+@view_config(renderer='templates/index.mako', accept='text/html')
 def index(request):
     return {}
 
