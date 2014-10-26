@@ -4,6 +4,7 @@ log = logging.getLogger(__name__)
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
+from .models import DBSession
 
 required_settings = [
         'pyramid.secret.session',
