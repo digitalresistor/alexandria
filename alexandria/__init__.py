@@ -29,6 +29,8 @@ def main(global_config, **settings):
         log.error('Unable to start due to missing configuration')
         exit(-1)
 
+    # Include the transaction manager
+    config.include('pyramid_tm')
 
     config.add_static_view('static', 'static', cache_max_age=3600)
 
