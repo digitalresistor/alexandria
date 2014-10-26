@@ -1,6 +1,11 @@
-from pyramid.response import Response
-from pyramid.view import view_config
+from pyramid.view import (
+        view_config,
+        notfound_view_config,
+        )
 
-def home(request):
-    return {'info': "alexandria"}
+# Always send the default index.html
+@notfound_view_config(renderer='templates/index.mako')
+@view_config(renderer='templates/index.mako')
+def index(request):
+    return {}
 
