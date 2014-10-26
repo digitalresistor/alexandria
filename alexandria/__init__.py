@@ -5,6 +5,10 @@ from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
 
+required_settings = [
+        'pyramid.secret.session',
+        'pyramid.secret.auth',
+        ]
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -13,8 +17,15 @@ def main(global_config, **settings):
     DBSession.configure(bind=engine)
     config = Configurator(settings=settings)
 
+    do_start = True
 
+    for _req in required_settings:
+        if _req not in settings:
+            log.error('{} is not set in configuration file.'.format(_req))
+            do_start = False
 
+    if do_start is False:
+        log.error('Unable to start due to missing configuration')
         exit(-1)
 
 
