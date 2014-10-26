@@ -15,6 +15,7 @@ requires = [
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
     'waitress',
+    'pyramid_mako',
     ]
 
 setup(name='alexandria',
