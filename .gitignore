@@ -1,1 +1,2 @@
 *.egg-info
+alexandria/static/js/3rdparty/*
