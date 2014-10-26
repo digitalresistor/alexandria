@@ -1,0 +1,15 @@
+{
+  "name": "alexandria",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "alexandria/static/js/3rdparty/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.0"
+  }
+}
