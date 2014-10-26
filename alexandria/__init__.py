@@ -39,6 +39,8 @@ def main(global_config, **settings):
             use_global_views=True
             )
 
+    # Scan the views sub-module
+    config.scan('.views')
 
     return config.make_wsgi_app()
 
