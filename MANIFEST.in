@@ -1,0 +1,3 @@
+include *.txt *.ini *.cfg *.rst README CHANGES LICENSE
+recursive-include configs *.ini
+recursive-include alexandria *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.js *.html *.xml
