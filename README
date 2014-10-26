@@ -1,14 +1,27 @@
-alexandria README
+Alexandria README
 ==================
 
-Getting Started
----------------
+Alexandria is a a DNS management solution that allows you to easily manage your
+zone files using a simple to use web interface.
 
-- cd <directory containing this file>
+Installation
+------------
 
-- $venv/bin/python setup.py develop
+ - Wait for this package to be available on PyPi...
 
-- $venv/bin/initialize_alexandria_db development.ini
+Developing
+----------
 
-- $venv/bin/pserve configs/development.ini
+Getting the application set up locally:
 
+ 0. Change directory to this project
+ 1. Create virtualenv for Project in $venv
+ 2. $venv/bin/pip install -e .
+ 3. $venv/bin/initialize_alexandria_db config/development.ini
+ 4. $venv/bin/pserve config/development.ini
+
+For submitting patches back to the project:
+
+ 0. Create a new branch for the feature/topic from master
+ 1. Hack away
+ 2. Submit a pull request
