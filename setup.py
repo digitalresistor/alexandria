@@ -7,16 +7,17 @@ README = open(os.path.join(here, 'README')).read()
 CHANGES = open(os.path.join(here, 'CHANGES')).read()
 
 requires = [
-    'pyramid',
-    'SQLAlchemy',
-    'psycopg2',
-    'transaction',
-    'pyramid_tm',
-    'pyramid_debugtoolbar',
-    'zope.sqlalchemy',
-    'waitress',
-    'pyramid_mako',
-    ]
+        'pyramid',
+        'SQLAlchemy',
+        'psycopg2',
+        'transaction',
+        'pyramid_tm',
+        'pyramid_debugtoolbar',
+        'zope.sqlalchemy',
+        'waitress',
+        'pyramid_mako',
+        'cryptacular',
+        ]
 
 setup(name='alexandria',
       version='0.0',
