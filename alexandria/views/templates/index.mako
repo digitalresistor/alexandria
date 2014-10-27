@@ -66,6 +66,11 @@
 <!-- controllers -->
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/controllers/main.js')}"></script>
 <!-- /controllers -->
+
+<!-- services -->
+<script type="text/javascript" src="${request.static_url('alexandria:static/js/services/user.js')}"></script>
+<!-- /services -->
+
 <!-- <script type="text/javascript" src="${request.static_url('alexandria:static/jquery-2.0.3.min.js')}"></script> -->
 </body>
 </html>
