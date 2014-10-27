@@ -37,7 +37,7 @@ from sqlalchemy.ext.hybrid import (
 from sqlalchemy.dialects.postgresql import UUID
 
 from .idna import IdnaComparator
-from .types import value_to_type
+from .types import type_to_value
 
 
 class Record(Base):
@@ -47,7 +47,7 @@ class Record(Base):
             Column('resource', String(256), index=True, unique=True),
             Column('ttl', Integer, server_default=text('3600')),
             Column('class', String(10), default=u"IN"),
-            Column('type', Enum(*[str(x) for x in value_to_type.keys()], name='resource_type')),
+            Column('type', Enum(*type_to_value.keys(), name='resource_type')),
             Column('record', Text),
             Column('priority', Integer, server_default=text('0'), nullable=True),
             Column('created', DateTime, server_default=text('current_timestamp')),
