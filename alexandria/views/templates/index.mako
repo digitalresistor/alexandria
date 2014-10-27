@@ -61,6 +61,7 @@
 
 <!-- application -->
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/app.js')}"></script>
+<script type="text/javascript" src="${request.static_url('alexandria:static/js/router.js')}"></script>
 <!-- /application -->
 
 <!-- controllers -->
