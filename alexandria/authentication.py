@@ -93,7 +93,7 @@ class AuthPolicy(object):
 
         result = self.cookie.bind(request).get_value()
 
-        self.debug and self._log('Got result from cookie: %s' % (result,), 'unauthenticated_userid', request)
+        self.debug and self._log('Got result from cookie: %s' % (result,), 'authenticated_userid', request)
 
         class UserInfo(object):
             def __init__(self):
