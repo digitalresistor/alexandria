@@ -41,6 +41,7 @@ def main(global_config, **settings):
 
     config.add_route('main',
             '/*traverse',
+            factory='.traversal.Root',
             use_global_views=True
             )
 
