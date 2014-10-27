@@ -34,7 +34,6 @@ class User(Base):
     __table__ = Table('users', Base.metadata,
             Column('id', UUID(as_uuid=True), server_default=text("uuid_generate_v4()"), primary_key=True, unique=True),
             Column('email', String(256), unique=True, index=True),
-            Column('name', Unicode(256), index=True),
             Column('credentials', String(60))
             )
 
