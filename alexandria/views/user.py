@@ -3,7 +3,10 @@ from pyramid.view import (
         view_defaults,
         )
 
-from pyramid.httpexceptions import HTTPSeeOther
+from pyramid.httpexceptions import (
+        HTTPSeeOther,
+        HTTPNotFound,
+        )
 
 from pyramid.security import (
         remember,
@@ -43,3 +46,11 @@ class User(object):
     def logout(self):
         headers = forget(self.request)
         return HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
+
+    @view_config(
+                context=HTTPNotFound,
+                containment='..traversal.User'
+            )
+    def not_found(self):
+        self.request.response.status = 404
+        return self.request.response
