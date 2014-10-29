@@ -15,3 +15,9 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         requireBase: false
     });
 }]);
+
+app.run(['$rootScope', '$log', '$route', 'User', function ($rootScope, $log, $route, User) {
+    $rootScope.$on('user', function(event) {
+        $route.reload();
+    });
+}]);
