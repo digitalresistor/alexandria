@@ -32,11 +32,9 @@ app.run(['$rootScope', '$log', '$route', 'User', function ($rootScope, $log, $ro
 
         // Check to see if the user is logged in ...
         if (!User.getIsLoggedIn()) {
-            $log.debug('User is not logged in... changing html.');
+            $log.debug('User is not logged in: forceably changing template/controller.');
             next.templateUrl = '/html/login.html';
             next.controller = 'LoginCtrl';
-        } else {
-            $log.debug('User is logged in. Continuing on.');
         }
     });
 
