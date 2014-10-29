@@ -64,12 +64,11 @@ app.service('User', ['$rootScope', '$q', '$http', '$log',
                 var deferred = $q.defer();
 
                 $http.post('/user/logout').success(function(data, status, headers, config) {
-                    // Reset locally cached user information
-                    service.resetService();
-                    deferred.resolve(data);
                     $log.debug('User has been logged out...');
+                    service.setUser({});
+                    deferred.resolve(true);
                 }).error(function(data, status, headers, config) {
-                    deferred.reject(data);
+                    deferred.reject(false);
                 }.bind(this));
 
                 return deferred.promise;
