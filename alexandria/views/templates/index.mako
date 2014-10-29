@@ -35,7 +35,7 @@
     </div>
   </div>
 </header>
-<div class="container">
+<div class="container" ng-view>
 </div>
 <footer class="footer-2">
     <div class="footer-logo">
