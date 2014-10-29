@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${request.static_url('alexandria:static/css/style.css')}" type="text/css" />
 </head>
 
-<body ng-init="initMain()">
+<body>
 <header class="navigation">
   <div class="navigation-wrapper">
     <a href="javascript:void(0)" class="logo">

@@ -1,9 +1,5 @@
 app.controller('MainCtrl', ['$scope', '$route', '$log', 'User',
     function($scope, $route, $log, User) {
-        $scope.initMain = function() {
-            $scope.checkLoggedIn();
-        };
-
         $scope.logout = function(event) {
             User.logout().then(function(data) {
                 $log.debug('User has been logged out...');
