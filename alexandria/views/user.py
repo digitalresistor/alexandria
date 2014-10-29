@@ -3,6 +3,8 @@ from pyramid.view import (
         view_defaults,
         )
 
+from pyramid.httpexceptions import HTTPSeeOther
+
 from pyramid.security import (
         remember,
         forget,
@@ -20,6 +22,13 @@ class User(object):
             ret = {
                     'authenticated': False,
                     }
+        else:
+            ret = {
+                    'authenticated': True,
+                    'user': {
+                            'username': 'example@example.com',
+                        }
+                    }
         return ret
 
     @view_config(name='login')
@@ -27,12 +36,10 @@ class User(object):
         if self.request.body:
             print(self.request.json_body)
             headers = remember(self.request, "example@example.com")
-            self.request.response.headers.extend(headers)
+            return HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
         return {}
 
     @view_config(name='logout')
     def logout(self):
-        if self.request.body:
-            print(self.request.json_body)
-        return {}
-
+        headers = forget(self.request)
+        return HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
