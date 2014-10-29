@@ -17,6 +17,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 }]);
 
 app.run(['$rootScope', '$log', 'User', function ($rootScope, $log, User) {
+    $rootScope.user_not_checked = true;
+
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
 
         // Check to see if the user is logged in ...
