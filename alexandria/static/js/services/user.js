@@ -34,7 +34,8 @@ app.service('User', ['$rootScope', '$q', '$http', '$log',
                 var deferred = $q.defer();
 
                 $http.get('/user').success(function(data, status, headers, config) {
-                    deferred.resolve(service.setUser(data));
+                    ret = service.setUser(data);
+                    deferred.resolve(ret);
                 }).error(function(data, status, headers, config) {
                     service.resetService();
                     deferred.reject(data);
