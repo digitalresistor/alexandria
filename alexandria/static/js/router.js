@@ -21,6 +21,13 @@ app.run(['$rootScope', '$log', '$route', 'User', function ($rootScope, $log, $ro
     $rootScope.user = User.getUser();
     $rootScope.isLoggedIn = User.getIsLoggedIn();
 
+    // Fetch user data/auth state
+    User.checkLoggedIn().then(function(data) {
+        $log.debug('checkLoggedIn succeeded.');
+    }).catch(function(data) {
+        $log.error('checkLoggedIn failed.');
+    });
+
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
 
         // Check to see if the user is logged in ...
