@@ -9,3 +9,9 @@ from pyramid.view import (
 def index(request):
     return {}
 
+@notfound_view_config(route_name='__css/')
+@notfound_view_config(route_name='__js/')
+@notfound_view_config(route_name='__html/')
+def not_found(request):
+    request.response.status = 404
+    return request.response
