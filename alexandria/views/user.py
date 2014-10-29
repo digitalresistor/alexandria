@@ -31,7 +31,7 @@ class User(object):
                     }
         return ret
 
-    @view_config(name='login')
+    @view_config(name='login', check_csrf=True, request_method='POST')
     def login(self):
         if self.request.body:
             print(self.request.json_body)
@@ -39,7 +39,7 @@ class User(object):
             return HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
         return {}
 
-    @view_config(name='logout')
+    @view_config(name='logout', check_csrf=True, request_method='POST')
     def logout(self):
         headers = forget(self.request)
         return HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
