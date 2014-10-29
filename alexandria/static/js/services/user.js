@@ -1,5 +1,5 @@
-app.service('User', ['$rootScope', '$q', '$http',
-    function($rootScope, $q, $http) {
+app.service('User', ['$rootScope', '$q', '$http', '$log',
+    function($rootScope, $q, $http, $log) {
         var service = {
             user: {},
             isLoggedIn: false,
@@ -66,6 +66,7 @@ app.service('User', ['$rootScope', '$q', '$http',
                     // Reset locally cached user information
                     service.resetService();
                     deferred.resolve(data);
+                    $log.debug('User has been logged out...');
                 }).error(function(data, status, headers, config) {
                     deferred.reject(data);
                 }.bind(this));
