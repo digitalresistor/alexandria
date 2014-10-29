@@ -17,7 +17,7 @@ app.service('User', ['$rootScope', '$q', '$http',
                 if (user && user.authenticated == true) {
                     service.user = user;
                     service.isLoggedIn = true;
-                    $rootScope.$broadcast('user.update', user);
+                    $rootScope.$broadcast('user', user);
                     return user.authenticated;
                 }
 

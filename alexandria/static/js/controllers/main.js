@@ -14,12 +14,9 @@ app.controller('MainCtrl', ['$scope', '$log', 'User',
 
             // ============= Watch =============
             $scope.user = User.getUser();
-            $scope.$on('user.update', function(event) {
-                $scope.user = User.getUser();
-            });
-
             $scope.isLoggedIn = User.getIsLoggedIn();
-            $scope.$on('user.loggedin.status', function(event) {
+            $scope.$on('user', function(event) {
+                $scope.user = User.getUser();
                 $scope.isLoggedIn = User.getIsLoggedIn();
             });
         }
