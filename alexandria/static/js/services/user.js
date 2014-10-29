@@ -19,9 +19,10 @@ app.service('User', ['$rootScope', '$q', '$http',
                     service.isLoggedIn = true;
                     $rootScope.$broadcast('user', user);
                     return user.authenticated;
+                } else {
+                    service.resetService();
+                    return false;
                 }
-
-                return false;
             },
 
             getIsLoggedIn: function() {
