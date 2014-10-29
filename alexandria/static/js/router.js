@@ -29,6 +29,11 @@ app.run(['$rootScope', '$log', '$route', 'User', function ($rootScope, $log, $ro
     });
 
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
+        // We don't want to start routing until we have checked the user...
+        if ($rootScope.user_not_checked) {
+            event.preventDefault();
+            return;
+        }
 
         // Check to see if the user is logged in ...
         if (!User.getIsLoggedIn()) {
@@ -41,8 +46,6 @@ app.run(['$rootScope', '$log', '$route', 'User', function ($rootScope, $log, $ro
     $rootScope.$on('user', function(event) {
         if ($rootScope.user_not_checked === true) {
             $rootScope.user_not_checked = false;
-
-            if (!User.getIsLoggedIn()) return;
         }
 
         $rootScope.user = User.getUser();
