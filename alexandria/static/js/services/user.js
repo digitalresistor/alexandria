@@ -51,6 +51,7 @@ app.service('User', ['$rootScope', '$q', '$http', '$log',
                     username: username,
                     password: password,
                 }).success(function(data, status, headers, config) {
+                    $log.debug('User has been logged in...');
                     service.setUser(data);
                     deferred.resolve(data);
                 }).error(function(data, status, headers, config) {
