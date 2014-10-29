@@ -21,6 +21,7 @@ app.service('User', ['$rootScope', '$q', '$http',
                     return user.authenticated;
                 } else {
                     service.resetService();
+                    $rootScope.$broadcast('user', user);
                     return false;
                 }
             },
