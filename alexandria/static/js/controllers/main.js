@@ -1,14 +1,14 @@
-app.controller('MainCtrl', ['$scope', 'User',
-        function($scope, User) {
+app.controller('MainCtrl', ['$scope', '$log', 'User',
+        function($scope, $log, User) {
             $scope.initMain = function() {
                 $scope.checkLoggedIn();
             };
 
             $scope.checkLoggedIn = function() {
                 User.checkLoggedIn().then(function(data) {
-                    console.log("User logged in? %o", data);
+                    $log.debug("User logged in: %o", data);
                 }).catch(function(data) {
-                    console.error("ERROR! %o", data);
+                    $log.error("ERROR! %o", data);
                 });
             };
 
