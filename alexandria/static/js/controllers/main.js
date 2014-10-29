@@ -20,14 +20,5 @@ app.controller('MainCtrl', ['$scope', '$route', '$log', 'User',
             });
 
         }
-
-        // ============= Watch =============
-        $scope.user = User.getUser();
-        $scope.isLoggedIn = User.getIsLoggedIn();
-        $scope.$on('user', function(event) {
-            $log.debug("User changed: {%o, %o}", User.getUser(), User.getIsLoggedIn());
-            $scope.user = User.getUser();
-            $scope.isLoggedIn = User.getIsLoggedIn();
-        });
     }
 ]);

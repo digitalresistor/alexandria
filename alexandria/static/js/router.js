@@ -18,6 +18,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
 app.run(['$rootScope', '$log', '$route', 'User', function ($rootScope, $log, $route, User) {
     $rootScope.user_not_checked = true;
+    $rootScope.user = User.getUser();
+    $rootScope.isLoggedIn = User.getIsLoggedIn();
 
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
 
@@ -38,6 +40,8 @@ app.run(['$rootScope', '$log', '$route', 'User', function ($rootScope, $log, $ro
             if (!User.getIsLoggedIn()) return;
         }
 
+        $rootScope.user = User.getUser();
+        $rootScope.isLoggedIn = User.getIsLoggedIn();
         $route.reload();
     });
 }]);
