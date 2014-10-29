@@ -31,7 +31,7 @@
           </button>
         </div>
       </div>
-      <a href="javascript:void(0)" class="login">Login</a>
+      <a href="" ng-click="logout()" class="button" ng-show="isLoggedIn">Logout</a>
     </div>
   </div>
 </header>
