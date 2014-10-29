@@ -34,6 +34,12 @@ app.run(['$rootScope', '$log', 'User', function ($rootScope, $log, User) {
 
 app.run(['$rootScope', '$log', '$route', 'User', function ($rootScope, $log, $route, User) {
     $rootScope.$on('user', function(event) {
+        if ($rootScope.user_not_checked === true) {
+            $rootScope.user_not_checked = false;
+
+            if (!User.getIsLoggedIn()) return;
+        }
+
         $route.reload();
     });
 }]);
