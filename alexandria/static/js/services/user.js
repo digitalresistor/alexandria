@@ -69,7 +69,7 @@ app.service('User', ['$rootScope', '$q', '$http', '$log',
                     service.setUser({});
                     deferred.resolve(true);
                 }).error(function(data, status, headers, config) {
-                    deferred.reject(false);
+                    deferred.reject(data);
                 }.bind(this));
 
                 return deferred.promise;
