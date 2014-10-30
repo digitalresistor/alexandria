@@ -44,11 +44,11 @@ app.service('User', ['$rootScope', '$q', '$http', '$log',
                 return deferred.promise;
             },
 
-            login: function(username, password) {
+            login: function(email, password) {
                 var deferred = $q.defer();
 
                 $http.post('/user/login', {
-                    username: username,
+                    email: email,
                     password: password,
                 }).success(function(data, status, headers, config) {
                     $log.debug('User has been logged in...');
