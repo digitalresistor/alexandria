@@ -43,8 +43,6 @@ class User(object):
 
     @view_config(name='login', check_csrf=True, request_method='POST')
     def login(self):
-        if self.request.body:
-            print(self.request.json_body)
             headers = remember(self.request, "example@example.com")
             return HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
         return {}
