@@ -45,10 +45,13 @@
         </ul>
     </div>
 </footer>
+
+<!-- 3rd party libraries -->
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/3rdparty/angular/angular.min.js')}"></script>
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/3rdparty/angular-resource/angular-resource.min.js')}"></script>
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/3rdparty/angular-route/angular-route.min.js')}"></script>
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/3rdparty/underscore/underscore-min.js')}"></script>
+<!-- /3rd party libraries -->
 
 <!-- application -->
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/app.js')}"></script>
