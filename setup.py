@@ -17,6 +17,7 @@ requires = [
         'waitress',
         'pyramid_mako',
         'cryptacular',
+        'colander',
         ]
 
 setup(name='alexandria',
