@@ -36,7 +36,7 @@ class User(object):
             ret = {
                     'authenticated': True,
                     'user': {
-                            'username': 'example@example.com',
+                            'username': self.request.user.user.email,
                         }
                     }
         return ret
