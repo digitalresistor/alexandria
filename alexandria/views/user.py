@@ -14,6 +14,10 @@ from pyramid.security import (
         forget,
         )
 
+import colander
+
+from .. import schemas as s
+
 @view_defaults(accept='application/json', renderer='json', context='..traversal.User')
 class User(object):
     def __init__(self, context, request):
@@ -43,9 +47,22 @@ class User(object):
 
     @view_config(name='login', check_csrf=True, request_method='POST')
     def login(self):
+        try:
+            schema = s.UserSchema.create_schema(self.request)
+            deserialized = schema.deserialize(self.cstruct)
+
             headers = remember(self.request, "example@example.com")
-            return HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
-        return {}
+            token = self.request.session.new_csrf_token()
+
+            response = HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
+            response.set_cookie('CSRF-Token', token, max_age=864000, overwrite=True)
+
+            return response
+        except colander.Invalid as e:
+            self.request.response.status = 406
+            return {
+                    'errors': e.asdict(),
+                    }
 
     @view_config(name='logout', check_csrf=True, request_method='POST')
     def logout(self):
