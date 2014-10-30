@@ -12,6 +12,8 @@ def index(request):
     response.set_cookie('CSRF-Token', token, max_age=864000, overwrite=True)
     return {}
 
+@notfound_view_config(route_name='__static/')
+@notfound_view_config(route_name='__img/')
 @notfound_view_config(route_name='__css/')
 @notfound_view_config(route_name='__js/')
 @notfound_view_config(route_name='__html/')
