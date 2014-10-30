@@ -18,7 +18,14 @@ Getting the application set up locally:
  1. Create virtualenv for Project in $venv
  2. $venv/bin/pip install -e .
  3. $venv/bin/initialize_alexandria_db config/development.ini
- 4. $venv/bin/pserve config/development.ini
+ 4. install bower using npm:
+    npm install -g bower
+ 5. bower install
+ 6. install the sass gem:
+    gem install sass
+ 7. Generate the CSS using sass:
+    (cd alexandria/static/css && sass style.scss)
+ 8. $venv/bin/pserve config/development.ini
 
 For submitting patches back to the project:
 
