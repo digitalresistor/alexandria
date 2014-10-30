@@ -6,6 +6,7 @@ from pyramid.view import (
 from pyramid.httpexceptions import (
         HTTPSeeOther,
         HTTPNotFound,
+        HTTPUnprocessableEntity,
         )
 
 from pyramid.security import (
@@ -18,6 +19,12 @@ class User(object):
     def __init__(self, context, request):
         self.request = request
         self.context = context
+
+        if self.request.body:
+            try:
+                self.cstruct = self.request.json_body
+            except ValueError:
+                raise HTTPUnprocessableEntity()
 
     @view_config()
     def info(self):
