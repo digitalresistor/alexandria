@@ -1,7 +1,12 @@
+import logging
+log = logging.getLogger(__name__)
+
 from pyramid.view import (
         view_config,
         view_defaults,
         )
+
+from pyramid.exceptions import BadCSRFToken
 
 from pyramid.httpexceptions import (
         HTTPSeeOther,
@@ -14,6 +19,8 @@ from pyramid.security import (
         remember,
         forget,
         )
+
+from pyramid.session import check_csrf_token
 
 import colander
 
@@ -30,6 +37,14 @@ class User(object):
                 self.cstruct = self.request.json_body
             except ValueError:
                 raise HTTPBadRequest()
+
+    def csrf_valid(self):
+        if check_csrf_token(self.request, raises=False) == False:
+            log.debug('CSRF token did not match.')
+            log.debug('Expected token: {}'.format(self.request.session.get_csrf_token()))
+            log.debug('Got headers: {}'.format(self.request.headers))
+
+            raise BadCSRFToken()
 
     @view_config()
     def info(self):
