@@ -7,6 +7,7 @@ from pyramid.httpexceptions import (
         HTTPSeeOther,
         HTTPNotFound,
         HTTPUnprocessableEntity,
+        HTTPBadRequest,
         )
 
 from pyramid.security import (
@@ -28,7 +29,7 @@ class User(object):
             try:
                 self.cstruct = self.request.json_body
             except ValueError:
-                raise HTTPUnprocessableEntity()
+                raise HTTPBadRequest()
 
     @view_config()
     def info(self):
