@@ -60,7 +60,7 @@ class User(object):
 
             return response
         except colander.Invalid as e:
-            self.request.response.status = 406
+            self.request.response.status = 422
             return {
                     'errors': e.asdict(),
                     }
