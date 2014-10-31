@@ -96,3 +96,16 @@ class User(object):
     def not_found(self):
         self.request.response.status = 404
         return self.request.response
+
+    @view_config(
+            context=BadCSRFToken,
+            containment='..traversal.User',
+            renderer='json',
+            )
+    def bad_csrf(self):
+        self.request.response.status = 400
+        return {
+                'errors': {
+                    'csrf': 'Invalid CSRF token. Please try again.'
+                    },
+                }
