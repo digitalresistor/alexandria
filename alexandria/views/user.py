@@ -42,7 +42,7 @@ class User(object):
         if check_csrf_token(self.request, raises=False) == False:
             log.debug('CSRF token did not match.')
             log.debug('Expected token: {}'.format(self.request.session.get_csrf_token()))
-            log.debug('Got headers: {}'.format(self.request.headers))
+            log.debug('Got token: {}'.format(self.request.headers['x-csrf-token'] if 'x-csrf-token' in self.request.headers else None))
 
             raise BadCSRFToken()
 
