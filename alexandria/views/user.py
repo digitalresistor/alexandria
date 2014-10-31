@@ -61,8 +61,10 @@ class User(object):
                     }
         return ret
 
-    @view_config(name='login', check_csrf=True, request_method='POST')
+    @view_config(name='login', request_method='POST')
     def login(self):
+        self.csrf_valid()
+
         try:
             schema = s.UserSchema.create_schema(self.request)
             deserialized = schema.deserialize(self.cstruct)
@@ -80,8 +82,10 @@ class User(object):
                     'errors': e.asdict(),
                     }
 
-    @view_config(name='logout', check_csrf=True, request_method='POST')
+    @view_config(name='logout', request_method='POST')
     def logout(self):
+        self.csrf_valid()
+
         headers = forget(self.request)
         return HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
 
