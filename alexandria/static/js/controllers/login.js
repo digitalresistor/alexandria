@@ -24,6 +24,8 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
             }).catch(function(data) {
                 $log.debug('Unable to log user in... %o', data);
 
+                $scope.errors = {}
+
                 angular.forEach(data.errors, function(error, field) {
                     $scope.form[field].$setValidity('server', false);
                     $scope.errors[field] = error;
