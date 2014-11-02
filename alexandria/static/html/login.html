@@ -1,6 +1,6 @@
 <h1>Login</h1>
 
-<form name="form">
+<form name="form" ng-submit="login()">
     <label>Email:
         <input type="text" name="email" ng-model="loginForm.email" required server-error>
     </label>
@@ -20,5 +20,5 @@
         <span ng-show="form.password.$error.server">{{ errors.password }}</span>
     </div>
 
-    <button type="submit" class="button" ng-click="login()">Login</button>
+    <button type="submit" class="button">Login</button>
 </form>
