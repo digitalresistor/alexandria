@@ -6,7 +6,7 @@
     </div>
 
     <label>Email:
-        <input type="text" name="email" ng-model="loginForm.email" required server-error>
+        <input type="email" name="email" placeholder="example@example.com" ng-model="loginForm.email" required server-error>
     </label>
 
     <div class="errors" ng-show="form.email.$dirty && form.email.$invalid">
