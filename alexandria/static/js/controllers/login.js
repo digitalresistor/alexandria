@@ -10,6 +10,7 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
                 // Dirty hack because $scope.form contains so much more than just the fields
                 if (typeof ctrl === 'object' && ctrl.hasOwnProperty('$modelValue')) {
                     ctrl.$dirty = true;
+                    ctrl.$pristine = false;
                 }
             });
 
