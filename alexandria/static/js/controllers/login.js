@@ -14,7 +14,7 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
                 }
             });
 
-            if ($scope.form.$valid == false) {
+            if ($scope.form.$invalid) {
                 $log.debug('Form is invalid. Not sending request to server.')
                 return;
             }
