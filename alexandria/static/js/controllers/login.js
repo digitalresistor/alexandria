@@ -11,6 +11,10 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
                 if (typeof ctrl === 'object' && ctrl.hasOwnProperty('$modelValue')) {
                     ctrl.$dirty = true;
                     ctrl.$pristine = false;
+
+                    // Add a viewChangeListener, so that if the form is
+                    // modified at all, we remove .submitted
+                    ctrl.$viewChangeListeners.push($scope.modified);
                 }
             });
 
@@ -38,6 +42,10 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
                     });
                 }
             });
+        };
+
+        $scope.modified = function() {
+            $scope.form.submitted = false;
         };
     }
 ]);
