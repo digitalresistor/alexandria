@@ -25,14 +25,18 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
             User.login($scope.loginForm.email, $scope.loginForm.password).then(function(data) {
                 $route.reload();
             }).catch(function(data) {
-                $log.debug('Unable to log user in... %o', data);
-
+                // Reset the errors list
                 $scope.errors = {}
 
-                angular.forEach(data.errors, function(error, field) {
-                    $scope.form[field].$setValidity('server', false);
-                    $scope.errors[field] = error;
-                });
+                // Set the full form error
+                $scope.errors['form_error'] = data.form_error;
+
+                if (data.form_error === null) {
+                    angular.forEach(data.errors, function(error, field) {
+                        $scope.form[field].$setValidity('server', false);
+                        $scope.errors[field] = error;
+                    });
+                }
             });
         };
     }
