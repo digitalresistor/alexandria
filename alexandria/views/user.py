@@ -69,7 +69,7 @@ class User(object):
             schema = s.UserSchema.create_schema(self.request)
             deserialized = schema.deserialize(self.cstruct)
 
-            headers = remember(self.request, "example@example.com")
+            headers = remember(self.request, deserialized['email'])
             token = self.request.session.new_csrf_token()
 
             response = HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
