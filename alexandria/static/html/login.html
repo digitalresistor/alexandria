@@ -1,17 +1,22 @@
 <h1>Login</h1>
 
 <form name="form" no-validate>
+    <label>Email:
+        <input type="text" name="email" ng-model="loginForm.email" server-error>
+    </label>
+
     <div class="errors" ng-show="form.email.$dirty && form.email.$invalid">
         <span ng-show="form.email.$error.server">{{ errors.email }}</span>
     </div>
 
-    <label>Username:
-        <input type="text" name="email" ng-model="loginForm.email" server-error>
-    </label> 
-
     <label>Password:
         <input type="password" name="password" ng-model="loginForm.password" server-error>
-    </label> 
+    </label>
+
+
+    <div class="errors" ng-show="form.password.$dirty && form.password.$invalid">
+        <span ng-show="form.password.$error.server">{{ errors.password }}</span>
+    </div>
 
     <button type="submit" class="button" ng-click="login()">Login</button>
 </form>
