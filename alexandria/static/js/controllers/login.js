@@ -19,6 +19,8 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
                 return;
             }
 
+            $scope.form.submitted = true;
+
             $log.debug('Attempting to log user in...');
             User.login($scope.loginForm.email, $scope.loginForm.password).then(function(data) {
                 $route.reload();
