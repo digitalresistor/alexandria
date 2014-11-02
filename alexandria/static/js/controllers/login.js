@@ -6,7 +6,9 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
         $scope.login = function() {
             $log.debug('Setting all the form fields to $dirty...');
             // Reset the errors list
-            $scope.errors = {}
+            if ($scope.form.submitted == false) {
+                $scope.errors = {};
+            }
 
             angular.forEach($scope.form, function(ctrl, field) {
                 // Dirty hack because $scope.form contains so much more than just the fields
@@ -31,6 +33,8 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
             User.login($scope.loginForm.email, $scope.loginForm.password).then(function(data) {
                 $route.reload();
             }).catch(function(data) {
+                $scope.errors = {};
+
                 // Set the full form error
                 $scope.errors['form_error'] = data.form_error;
 
