@@ -4,7 +4,7 @@ app.controller('LoginCtrl', ['$scope', '$log', '$route', 'User',
         $scope.errors = {};
 
         $scope.login = function() {
-            $log.debug('Setting all the form fields to $dirty...')
+            $log.debug('Setting all the form fields to $dirty...');
 
             angular.forEach($scope.form, function(ctrl, field) {
                 // Dirty hack because $scope.form contains so much more than just the fields
