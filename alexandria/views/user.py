@@ -78,8 +78,17 @@ class User(object):
             return response
         except colander.Invalid as e:
             self.request.response.status = 422
+
+            form_error = None
+            field_errors = e.asdict()
+
+            if 'email' in field_errors and 'password' in field_errors:
+                if field_errors['email'] == field_errors['password']:
+                    form_error = "Username or password is incorrect."
+
             return {
-                    'errors': e.asdict(),
+                    'errors': field_errors,
+                    'form_error': form_error,
                     }
 
     @view_config(name='logout', request_method='POST')
