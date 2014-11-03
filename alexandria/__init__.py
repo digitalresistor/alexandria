@@ -50,5 +50,19 @@ def main(global_config, **settings):
     # Scan the views sub-module
     config.scan('.views')
 
+    class ExplicitAcceptPredicate(object):
+        def __init__(self, val, config):
+            self.val = val
+
+        def text(self):
+            return 'explicit_accept = %s' % (self.val,)
+
+        phash = text
+
+        def __call__(self, context, request):
+            return self.val in [accept for accept in request.accept]
+
+    config.add_view_predicate('explicit_accept', ExplicitAcceptPredicate)
+
     return config.make_wsgi_app()
 

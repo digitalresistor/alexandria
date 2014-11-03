@@ -26,7 +26,11 @@ import colander
 
 from .. import schemas as s
 
-@view_defaults(accept='application/json', renderer='json', context='..traversal.User')
+@view_defaults(
+        explicit_accept='application/json',
+        renderer='json',
+        context='..traversal.User',
+        )
 class User(object):
     def __init__(self, context, request):
         self.request = request
