@@ -112,7 +112,14 @@ class User(object):
             renderer='json',
             )
     def bad_csrf(self):
-        self.request.response.status = 400
+        response = self.request.response
+        response.status = 400
+
+        token = self.request.session.new_csrf_token()
+        response.set_cookie('CSRF-Token', token, max_age=864000, overwrite=True)
+
+        log.debug('New CSRF token: {}'.format(token));
+
         return {
                 'errors': {
                     'csrf': 'Invalid CSRF token. Please try again.'
