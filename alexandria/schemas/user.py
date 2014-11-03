@@ -22,6 +22,8 @@ def login_username_password(node, kw):
             exc['password'] = ''
             raise exc
 
+        value['email'] = user.email
+
     return username_password
 
 class UserSchema(colander.Schema):
