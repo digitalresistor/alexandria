@@ -20,3 +20,23 @@ def index(request):
 def not_found(request):
     request.response.status = 404
     return request.response
+
+@view_config(
+        context=BadCSRFToken,
+        containment='..traversal.Root',
+        renderer='json',
+        )
+def bad_csrf(request):
+    response = request.response
+    response.status = 400
+
+    token = request.session.new_csrf_token()
+    response.set_cookie('CSRF-Token', token, max_age=864000, overwrite=True)
+
+    log.debug('New CSRF token: {}'.format(token));
+
+    return {
+            'errors': {
+                'csrf': 'Invalid CSRF token. Please try again.'
+                },
+            }
