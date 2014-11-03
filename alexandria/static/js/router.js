@@ -6,6 +6,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         controller: 'HomeCtrl',
     });
 
+    rp.when('/domain/', {
+        templateUrl: '/html/domains.html',
+        controller: 'DomainsCtrl'
+    });
+
     rp.otherwise({
         redirectTo: '/'
     });
