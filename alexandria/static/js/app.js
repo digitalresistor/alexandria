@@ -4,13 +4,14 @@ var app = angular.module('app', [
         ]);
 
 
-app.factory('csrfReset', ['$q', '$injector', '$browser', function($q, $injector, $browser) {
+app.factory('csrfReset', ['$q', '$injector', '$browser', '$log', function($q, $injector, $browser, $log) {
     var csrfReset = {};
 
     csrfReset.responseError = function(response) {
         // When the CSRF token fails, we get back a new one in a cookie, retry
         // the request with the new token.
         if (response.status == 400 && typeof response.data.errors.csrf !== null) {
+            $log.debug('CSRF token was invalid, going to re-run request');
             var $http = $injector.get('$http');
             var httpConfig = response.config;
 
