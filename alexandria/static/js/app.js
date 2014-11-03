@@ -38,6 +38,10 @@ app.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('csrfReset');
 }]);
 
+app.config(['$logProvider', function($logProvider) {
+    $logProvider.debugEnabled(true);
+}]);
+
 app.directive('serverError', function() {
     return {
         restrict: 'A',
