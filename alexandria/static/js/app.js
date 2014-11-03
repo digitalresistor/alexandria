@@ -3,9 +3,38 @@ var app = angular.module('app', [
         'ngRoute'
         ]);
 
+
+app.factory('csrfReset', ['$q', '$injector', '$browser', function($q, $injector, $browser) {
+    var csrfReset = {};
+
+    csrfReset.responseError = function(response) {
+        // When the CSRF token fails, we get back a new one in a cookie, retry
+        // the request with the new token.
+        if (response.status == 400 && typeof response.data.errors.csrf !== null) {
+            var $http = $injector.get('$http');
+            var httpConfig = response.config;
+
+            // Get the new xsrfValue from the cookies
+            var xsrfValue = $browser.cookies()[$http.defaults.xsrfCookieName];
+
+            if (xsrfValue) {
+                httpConfig.headers[$http.defaults.xsrfHeaderName] = xsrfValue;
+            }
+
+            // Return the new request
+            return $http(httpConfig);
+        }
+
+        return $q.reject(response);
+    };
+
+    return csrfReset;
+}]);
+
 app.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRF-Token';
     $httpProvider.defaults.xsrfCookieName = 'CSRF-Token';
+    $httpProvider.interceptors.push('csrfReset');
 }]);
 
 app.directive('serverError', function() {
