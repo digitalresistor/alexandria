@@ -1,3 +1,6 @@
+import logging
+log = logging.getLogger(__name__)
+
 from pyramid.view import (
         view_config,
         notfound_view_config,
