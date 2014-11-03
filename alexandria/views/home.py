@@ -6,6 +6,11 @@ from pyramid.view import (
         notfound_view_config,
         )
 
+from pyramid.exceptions import (
+        BadCSRFToken,
+        PredicateMismatch,
+        )
+
 # Always send the default index.html
 @notfound_view_config(renderer='templates/index.mako', xhr=False, accept='text/html')
 @view_config(renderer='templates/index.mako', xhr=False, accept='text/html')
@@ -43,3 +48,18 @@ def bad_csrf(request):
                 'csrf': 'Invalid CSRF token. Please try again.'
                 },
             }
+
+@view_config(
+        context=PredicateMismatch,
+        containment='..traversal.Root',
+        effective_principals='system.Everyone',
+        )
+def not_authorized(request):
+    response = request.response
+
+    if request.authenticated_userid is not None:
+        response.status = 403
+    else:
+        response.status = 401
+
+    return response
