@@ -15,6 +15,9 @@ class Root(object):
         if key == 'user':
             next_ctx = User()
 
+        if key == 'domain':
+            next_ctx = Domains()
+
         if next_ctx is None:
             raise KeyError
 
@@ -33,7 +36,7 @@ class User(object):
         raise KeyError
 
 class Domains(object):
-    __name__ = 'domains'
+    __name__ = 'domain'
     __parent__ = None
 
     def __init__(self):
