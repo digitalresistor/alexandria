@@ -11,7 +11,6 @@ from pyramid.exceptions import BadCSRFToken
 from pyramid.httpexceptions import (
         HTTPSeeOther,
         HTTPNotFound,
-        HTTPUnprocessableEntity,
         HTTPBadRequest,
         )
 
@@ -65,7 +64,10 @@ class User(object):
                     }
         return ret
 
-    @view_config(name='login', request_method='POST')
+    @view_config(
+            name='login',
+            request_method='POST',
+            )
     def login(self):
         self.csrf_valid()
 
@@ -95,7 +97,10 @@ class User(object):
                     'form_error': form_error,
                     }
 
-    @view_config(name='logout', request_method='POST')
+    @view_config(
+            name='logout',
+            request_method='POST',
+            )
     def logout(self):
         self.csrf_valid()
 
@@ -103,8 +108,8 @@ class User(object):
         return HTTPSeeOther(location=self.request.route_url('main', traverse='user'), headers=headers)
 
     @view_config(
-                context=HTTPNotFound,
-                containment='..traversal.User'
+            context=HTTPNotFound,
+            containment='..traversal.User',
             )
     def not_found(self):
         self.request.response.status = 404
