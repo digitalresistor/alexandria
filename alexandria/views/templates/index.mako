@@ -10,30 +10,29 @@
 
 <body>
 <header class="navigation">
-  <div class="navigation-wrapper">
-    <a href="javascript:void(0)" class="logo">
-      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image">
-    </a>
-    <a href="" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
-    <div class="nav">
-      <ul id="navigation-menu">
-        <li class="nav-link"><a href="javascript:void(0)">Products</a></li>
-        <li class="nav-link"><a href="javascript:void(0)">About Us</a></li>
-        <li class="nav-link"><a href="javascript:void(0)">Contact</a></li>
-      </ul>
-    </div>
-    <div class="navigation-tools">
-      <div class="search-bar">
-        <div class="search-and-submit">
-          <input type="search" placeholder="Enter Search" />
-          <button type="submit">
-            <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
-          </button>
+    <div class="navigation-wrapper">
+        <a href="javascript:void(0)" class="logo">
+            <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image">
+        </a>
+        <a href="" class="navigation-menu-button" id="js-mobile-menu" ng-show="isLoggedIn">MENU</a>
+        <div class="nav" ng-show="isLoggedIn">
+            <ul id="navigation-menu">
+                <li class="nav-link"><a href="/">Home</a></li>
+                <li class="nav-link"><a href="/domain">Domains</a></li>
+            </ul>
         </div>
-      </div>
-      <a href="" ng-click="logout()" class="button" ng-show="isLoggedIn">Logout</a>
+        <div class="navigation-tools" ng-show="isLoggedIn">
+            <div class="search-bar">
+                <div class="search-and-submit">
+                    <input type="search" placeholder="Enter Search" />
+                    <button type="submit">
+                        <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
+                    </button>
+                </div>
+            </div>
+            <a href="" ng-click="logout()" class="button" ng-show="isLoggedIn">Logout</a>
+        </div>
     </div>
-  </div>
 </header>
 <div class="container" ng-view>
 </div>
