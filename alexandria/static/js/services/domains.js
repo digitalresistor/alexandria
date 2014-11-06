@@ -6,3 +6,10 @@ app.service('Domains', ['$rootScope', '$q', '$resource', '$log',
     }
 ]);
 
+app.factory('Domain', ['$resource', function($resource) {
+    return $resource('/domain/:id'{ id: '@_id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+}]);
