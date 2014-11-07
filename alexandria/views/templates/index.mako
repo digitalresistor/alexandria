@@ -66,6 +66,7 @@
 
 <!-- services -->
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/services/user.js')}"></script>
+<script type="text/javascript" src="${request.static_url('alexandria:static/js/services/domains.js')}"></script>
 <!-- /services -->
 
 <!-- <script type="text/javascript" src="${request.static_url('alexandria:static/jquery-2.0.3.min.js')}"></script> -->
