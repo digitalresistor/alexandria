@@ -1,5 +1,6 @@
-app.controller('DomainsCtrl', ['$scope',
-    function($scope) {
+app.controller('DomainsCtrl', ['$scope', 'Domains',
+    function($scope, Domains) {
+        $scope.domains = Domains.query();
     }
 ]);
 
