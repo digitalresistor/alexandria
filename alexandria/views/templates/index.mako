@@ -61,6 +61,7 @@
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/controllers/main.js')}"></script>
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/controllers/login.js')}"></script>
 <script type="text/javascript" src="${request.static_url('alexandria:static/js/controllers/home.js')}"></script>
+<script type="text/javascript" src="${request.static_url('alexandria:static/js/controllers/domains.js')}"></script>
 <!-- /controllers -->
 
 <!-- services -->
