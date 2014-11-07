@@ -55,7 +55,7 @@ class Domains(object):
     @view_config()
     def info(self):
         all_domains = m.DBSession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).all()
-        return {}
+        return []
 
     @view_config(
             context=HTTPNotFound,
