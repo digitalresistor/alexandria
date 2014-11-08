@@ -43,4 +43,17 @@ class Domains(object):
         pass
 
     def __getitem__(self, key):
+        next_ctx = Domain(key)
+        next_ctx.__parent__ = self
+
+        return next_ctx
+
+class Domain(object):
+    __name__ = None
+    __parent__ = None
+
+    def __init__(self, key):
+        pass
+
+    def __getitem__(self, key):
         raise KeyError
