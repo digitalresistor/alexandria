@@ -63,6 +63,33 @@ class Domains(object):
 
         return domains
 
+    @view_config(request_method='POST')
+    def save(self):
+        self.csrf_valid()
+
+        try:
+            schema = s.DomainSchema.create_schema(self.request)
+            deserialized = schema.deserialize(self.cstruct)
+
+            domain = m.Domain(owner_id=self.request.user.user.id, **deserialized)
+
+            m.DBSession.add(domain)
+            m.DBSession.flush()
+
+            response = HTTPSeeOther(location=self.request.route_url('main', traverse=('domain', domain.id)))
+
+            return response
+        except colander.Invalid as e:
+            self.request.response.status = 422
+
+            form_error = None
+            field_errors = e.asdict()
+
+            return {
+                    'errors': field_errors,
+                    'form_error': form_error,
+                    }
+
     @view_config(
             context=HTTPNotFound,
             containment='..traversal.Domains'
