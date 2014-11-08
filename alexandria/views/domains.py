@@ -71,6 +71,9 @@ class Domains(object):
                     'created': domain.created,
                     'updated': domain.updated,
                     }
+
+            domains.append(d)
+
         return domains
 
     @view_config(
