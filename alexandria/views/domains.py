@@ -59,20 +59,7 @@ class Domains(object):
         domains = []
 
         for domain in users_domains:
-            d = {
-                    'domain': domain.domain,
-                    'primary_ns': domain.primary_ns,
-                    'hostmaster': domain.hostmaster,
-                    'serial': domain.serial,
-                    'refresh': domain.refresh,
-                    'retry': domain.retry,
-                    'expiration': domain.expiration,
-                    'min_ttl': domain.min_ttl,
-                    'created': domain.created,
-                    'updated': domain.updated,
-                    }
-
-            domains.append(d)
+            domains.append(domain.to_appstruct(drop=['owner_id']))
 
         return domains
 
