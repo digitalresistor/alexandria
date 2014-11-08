@@ -54,8 +54,24 @@ class Domains(object):
 
     @view_config()
     def info(self):
-        all_domains = m.DBSession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).all()
-        return []
+        users_domains = m.DBSession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).all()
+
+        domains = []
+
+        for domain in users_domains:
+            d = {
+                    'domain': domain.domain,
+                    'primary_ns': domain.primary_ns,
+                    'hostmaster': domain.hostmaster,
+                    'serial': domain.serial,
+                    'refresh': domain.refresh,
+                    'retry': domain.retry,
+                    'expiration': domain.expiration,
+                    'min_ttl': domain.min_ttl,
+                    'created': domain.created,
+                    'updated': domain.updated,
+                    }
+        return domains
 
     @view_config(
             context=HTTPNotFound,
