@@ -34,6 +34,7 @@ def main(global_config, **settings):
 
     config.include('.session')
     config.include('.security')
+    config.include('.renderer')
 
     config.add_static_view('css', 'alexandria:static/css', cache_max_age=3600)
     config.add_static_view('js', 'alexandria:static/js', cache_max_age=3600)
