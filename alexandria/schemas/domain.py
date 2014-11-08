@@ -3,14 +3,37 @@ _ = TranslationStringFactory('alexandria')
 
 import colander
 
-from ..models import Domain
+from .. import models as m
+
+@colander.deferred
+def _new_domain(node, kw):
+    request = kw.get('request')
+
+    if request is None:
+        raise KeyError('Require bind: request')
+
+    def new_domain(form, value):
+        d = m.DBSession.query(m.Domain).filter(m.Domain.domain == value['domain']).first()
+
+        if d is not None:
+            exc = colander.Invalid(form)
+            exc['domain'] = _("Domain already exists")
+
+            if 'id' in value:
+                if d.id != value['id']:
+                    raise exc
+            else:
+                raise exc
+
+    return new_domain
+
 
 class DomainSchema(colander.Schema):
     """The schema for a domain"""
 
     @classmethod
     def create_schema(cls, request):
-        return cls().bind(request=request)
+        return cls(validator=_new_domain).bind(request=request)
 
     id = colander.SchemaNode(colander.String(), missing=colander.drop)
     owner_id = colander.SchemaNode(colander.String(), missing=colander.drop)
