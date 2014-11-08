@@ -32,6 +32,8 @@ from sqlalchemy.ext.hybrid import (
 
 from sqlalchemy.dialects.postgresql import UUID
 
+from sqlalchemy import inspect
+
 from .idna import IdnaComparator
 
 
@@ -115,3 +117,18 @@ class Domain(Base):
     def hostmaster(cls):
         return IdnaComparator(cls._hostmaster)
 
+
+    def to_appstruct(self, drop=None):
+        if drop is None:
+            drop = []
+
+        mapper = inspect(self.__class__)
+        columns = [column.key.strip('_') for column in mapper.attrs]
+
+        appstruct = {}
+
+        for column in columns:
+            if column not in drop:
+                appstruct[column] = getattr(self, column)
+
+        return appstruct
