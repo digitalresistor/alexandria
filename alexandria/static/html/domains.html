@@ -18,3 +18,34 @@
         </tr>
     </tbody>
 </table>
+
+<form name="newDomain" ng-submit="newDomainSubmit()">
+    <label>Domain:
+        <input type="text" name="domain" placeholder="example.com" ng-model="newDomainForm.domain" required server-error>
+    </label>
+
+    <div class="errors" ng-cloak ng-show="newDomain.domain.$dirty && newDomain.domain.$invalid">
+        <span ng-show="newDomain.domain.$error.required">Domain is required.</span>
+        <span ng-show="newDomain.domain.$error.server">{{ errors.domain }}</span>
+    </div>
+
+    <label>Hostmaster:
+        <input type="email" name="hostmaster" placeholder="example@example.com" ng-model="newDomainForm.hostmaster" required server-error>
+    </label>
+
+    <div class="errors" ng-cloak ng-show="newDomain.hostmaster.$dirty && newDomain.hostmaster.$invalid">
+        <span ng-show="newDomain.domain.$error.required">Hostmaster is required.</span>
+        <span ng-show="newDomain.hostmaster.$error.server">{{ errors.hostmaster }}</span>
+    </div>
+
+    <label>Primary NS:
+        <input type="text" name="primary_ns" placeholder="a.ns.example.com" ng-model="newDomainForm.primary_ns" required server-error>
+    </label>
+
+    <div class="errors" ng-cloak ng-show="newDomain.primary_ns.$dirty && newDomain.primary_ns.$invalid">
+        <span ng-show="newDomain.primary_ns.$error.required">Primary NS is required.</span>
+        <span ng-show="newDomain.primary_ns.$error.server">{{ errors.primary_ns }}</span>
+    </div>
+
+    <button type="submit" class="button">Create new Domain</button>
+</form>
