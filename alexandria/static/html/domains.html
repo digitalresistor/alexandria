@@ -6,6 +6,7 @@
     <thead>
         <tr>
             <th>Domain Name</th>
+            <th>Hostmaster</th>
             <th>Serial</th>
             <th>Created</th>
         </tr>
@@ -13,6 +14,7 @@
     <tbody>
         <tr ng-repeat="d in domains | orderBy:'domain':false">
             <td>{{d.domain}}</td>
+            <td>{{d.hostmaster}}</td>
             <td>{{d.serial}}</td>
             <td>{{d.created}}</td>
         </tr>
