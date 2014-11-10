@@ -1,8 +1,8 @@
 <h1>Domain list</h1>
 
-<div ng-show="domains.length == 0">No domains found.</div>
+<div ng-show="domains_loaded && domains.length == 0">No domains found.</div>
 
-<table ng-show="domains.length >= 0">
+<table ng-show="domains_loaded && domains.length > 0">
     <thead>
         <tr>
             <th>Domain Name</th>

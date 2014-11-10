@@ -1,6 +1,10 @@
 app.controller('DomainsCtrl', ['$scope', '$log', 'Domains',
     function($scope, $log, Domains) {
-        $scope.domains = Domains.query();
+        $scope.domains_loaded = false;
+        $scope.domains = Domains.query(function(value, responseHeader) {
+            $scope.domains_loaded = true;
+        });
+
         $scope.newDomainForm = {}
 
         $scope.newDomainSubmit = function() {
