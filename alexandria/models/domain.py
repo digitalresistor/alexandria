@@ -101,7 +101,7 @@ class Domain(Base):
     @hybrid_property
     def hostmaster(self):
         if isinstance(self, Domain):
-            return self._domain.encode('ascii').decode('idna').replace('.', '@', 1)
+            return self._hostmaster.encode('ascii').decode('idna').replace('.', '@', 1)
         return self._hostmaster
 
     @hostmaster.setter
