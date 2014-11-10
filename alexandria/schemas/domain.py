@@ -29,14 +29,16 @@ def _new_domain(node, kw):
 
 
 def hostmaster_periods(node, value):
+    mailbox = value
+
     if '@' in value:
         if value.count('@') > 1:
             raise colander.Invalid(node, "Email address can't contain multiple @ symbols")
 
         (mailbox, fqdn) = value.split('@')
 
-        if mailbox.count('.') > 0:
-            raise colander.Invalid(node, "Mailbox part in email address may not contain any periods. (Example: hostmaster@example.com)")
+    if mailbox.count('.') > 0:
+        raise colander.Invalid(node, "Mailbox part in email address may not contain any periods")
 
 
 class DomainSchema(colander.Schema):
