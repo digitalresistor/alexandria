@@ -28,6 +28,17 @@ def _new_domain(node, kw):
     return new_domain
 
 
+def hostmaster_periods(node, value):
+    if '@' in value:
+        if value.count('@') > 1:
+            raise colander.Invalid(node, "Email address can't contain multiple @ symbols")
+
+        (mailbox, fqdn) = value.split('@')
+
+        if mailbox.count('.') > 0:
+            raise colander.Invalid(node, "Mailbox part in email address may not contain any periods. (Example: hostmaster@example.com)")
+
+
 class DomainSchema(colander.Schema):
     """The schema for a domain"""
 
@@ -39,7 +50,7 @@ class DomainSchema(colander.Schema):
     owner_id = colander.SchemaNode(colander.String(), missing=colander.drop)
     domain = colander.SchemaNode(colander.String(), validator=colander.Length(max=256))
     primary_ns = colander.SchemaNode(colander.String(), validator=colander.Length(max=256))
-    hostmaster = colander.SchemaNode(colander.String(), validator=colander.Length(max=256))
+    hostmaster = colander.SchemaNode(colander.String(), validator=colander.All(colander.Length(max=256), hostmaster_periods))
     serial = colander.SchemaNode(colander.Integer(), missing=colander.drop)
     refresh = colander.SchemaNode(colander.Integer(), missing=colander.drop)
     retry = colander.SchemaNode(colander.Integer(), missing=colander.drop)
