@@ -10,8 +10,8 @@
             <th>Created</th>
         </tr>
     </thead>
-    <tbody ng-repeat="d in domains | orderBy:'domain':false">
-        <tr>
+    <tbody>
+        <tr ng-repeat="d in domains | orderBy:'domain':false">
             <td>{{d.domain}}</td>
             <td>{{d.serial}}</td>
             <td>{{d.created}}</td>
