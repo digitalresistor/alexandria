@@ -1,1 +1,20 @@
 <h1>Domain list</h1>
+
+<div ng-show="domains.length == 0">No domains found.</div>
+
+<table ng-show="domains.length >= 0">
+    <thead>
+        <tr>
+            <th>Domain Name</th>
+            <th>Serial</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="d in domains | orderBy:'domain':false">
+        <tr>
+            <td>{{d.domain}}</td>
+            <td>{{d.serial}}</td>
+            <td>{{d.created}}</td>
+        </tr>
+    </tbody>
+</table>
