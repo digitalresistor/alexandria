@@ -32,7 +32,7 @@
     </div>
 
     <label>Hostmaster:
-        <input type="email" name="hostmaster" placeholder="example@example.com" ng-model="newDomainForm.hostmaster" required server-error>
+        <input type="text" name="hostmaster" placeholder="example@example.com" ng-model="newDomainForm.hostmaster" required server-error>
     </label>
 
     <div class="errors" ng-cloak ng-show="newDomain.hostmaster.$dirty && newDomain.hostmaster.$invalid">
