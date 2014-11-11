@@ -53,7 +53,7 @@ class Domain(object):
     __parent__ = None
 
     def __init__(self, key):
-        pass
+        self.__name__ = key
 
     def __getitem__(self, key):
         raise KeyError
