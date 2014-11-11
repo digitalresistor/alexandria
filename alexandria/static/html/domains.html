@@ -8,15 +8,15 @@
             <th>Domain Name</th>
             <th>Hostmaster</th>
             <th>Serial</th>
-            <th>Created</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="d in domains | orderBy:'domain':false">
+        <tr ng-repeat="d in domains | orderBy:'domain':false track by d.id">
             <td>{{d.domain}}</td>
             <td>{{d.hostmaster}}</td>
             <td>{{d.serial}}</td>
-            <td>{{d.created}}</td>
+            <td><button type="submit" class="button" ng-click="deleteDomain(d)">Delete</button></td>
         </tr>
     </tbody>
 </table>
