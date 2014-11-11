@@ -1,3 +1,5 @@
+from uuid import UUID
+
 class Root(object):
     """ 
     The main root object for any traversal
@@ -53,7 +55,12 @@ class Domain(object):
     __parent__ = None
 
     def __init__(self, key):
-        self.__name__ = key
+        try:
+            self.id = UUID(key)
+        except ValueError:
+            raise ValueError('Invalid UUID')
+        
+        self.__name__ = '{}'.format(self.id)
 
     def __getitem__(self, key):
         raise KeyError
