@@ -61,6 +61,19 @@ class Domain(object):
 
         return domain.to_appstruct(drop=['owner_id'])
 
+    @view_config(request_method='DELETE')
+    def delete(self):
+        self.csrf_valid()
+
+        domain = m.DBSession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).filter(m.Domain.id == self.context.id).first()
+
+        if domain is None:
+            raise HTTPNotFound()
+
+        m.DBSession.delete(domain)
+
+        return {}
+
     @view_config(
             context=HTTPNotFound,
             containment='..traversal.Domain'
