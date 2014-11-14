@@ -26,6 +26,16 @@ app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
             }
         };
 
+        service.save = function(data, success, error) {
+            DomainsFactory.save(data, function(value, responseHeader) {
+                service.all.push(value);
+
+                success(value, responseHeader);
+            }, function(httpResponse) {
+                error(httpResonse);
+            });
+        }
+
         service.delete = function(domain) {
             (function() {
                 var domain_id = domain.id;
