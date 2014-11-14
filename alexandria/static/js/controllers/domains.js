@@ -37,7 +37,6 @@ app.controller('DomainsCtrl', ['$scope', '$log', 'Domains',
             $log.debug('Attempting to save domain');
 
             Domains.save($scope.newDomainForm, function(value, responseHeader) {
-                $scope.domains.push(value);
                 $scope.newDomainForm = {};
                 $scope.newDomain.$setPristine();
             }, function(httpResponse) {
