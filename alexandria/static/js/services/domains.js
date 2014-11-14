@@ -60,6 +60,10 @@ app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
             })();
         }
 
+        $log.debug("Initialised Domains");
+
+        service.query(function() {});
+
         return service;
     }
 ]);
