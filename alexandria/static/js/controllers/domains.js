@@ -57,27 +57,7 @@ app.controller('DomainsCtrl', ['$scope', '$log', 'Domains',
         };
 
         $scope.deleteDomain = function(domain) {
-            (function() {
-                var domain_id = domain.id;
-
-                angular.forEach($scope.domains, function(value, $index) {
-                    if (domain_id == value.id) {
-                        $scope.domains.splice($index, 1);
-                    }
-                });
-
-                $scope.deleted_domains.push(angular.copy(domain));
-
-                domain.$delete(function(value, reponseHeader) {
-                    angular.forEach($scope.deleted_domains, function(value, $index) {
-                        if (domain_id == value.id) {
-                            $scope.deleted_domains.splice($index, 1);
-                        }
-                    });
-                }, function(httpResponse) {
-                    $log.error('Unable to delete domain entry. %o', httpResonse);
-                });
-            })();
+            Domains.delete(domain);
         };
 
         $scope.modified = function() {

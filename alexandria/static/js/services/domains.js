@@ -11,6 +11,8 @@ app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
         var service = {};
 
         service.all = [];
+        service.deleted_domains = [];
+
         service.query = function(ret_func) {
             if (service.all.length == 0) {
                 $log.debug("Fetching list of domains.");
@@ -23,6 +25,30 @@ app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
                 return service.all;
             }
         };
+
+        service.delete = function(domain) {
+            (function() {
+                var domain_id = domain.id;
+
+                angular.forEach(service.all, function(value, $index) {
+                    if (domain_id == value.id) {
+                        service.all.splice($index, 1);
+                    }
+                });
+
+                service.deleted_domains.push(angular.copy(domain));
+
+                domain.$delete(function(value, reponseHeader) {
+                    angular.forEach(service.deleted_domains, function(value, $index) {
+                        if (domain_id == value.id) {
+                            service.deleted_domains.splice($index, 1);
+                        }
+                    });
+                }, function(httpResponse) {
+                    $log.error('Unable to delete domain entry. %o', httpResonse);
+                });
+            })();
+        }
 
         return service;
     }
