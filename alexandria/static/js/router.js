@@ -11,6 +11,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         controller: 'DomainsCtrl'
     });
 
+    rp.when('/domain/:domain', {
+        templateUrl: '/html/domain.html',
+        controller: 'DomainCtrl'
+    });
+
     rp.otherwise({
         redirectTo: '/'
     });
