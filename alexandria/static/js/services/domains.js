@@ -10,6 +10,8 @@ app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
     function($rootScope, $log, $q, DomainsFactory) {
         var service = {};
 
+        service.state = {};
+        service.state.loaded = false;
         service.all = [];
         service.deleted_domains = [];
 
@@ -62,7 +64,9 @@ app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
 
         $log.debug("Initialised Domains");
 
-        service.query(function() {});
+        service.query(function() {
+            service.state.loaded = true;
+        });
 
         return service;
     }
