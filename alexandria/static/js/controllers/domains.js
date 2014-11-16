@@ -1,10 +1,7 @@
 app.controller('DomainsCtrl', ['$scope', '$log', 'Domains',
     function($scope, $log, Domains) {
-        $scope.domains_loaded = false;
-        $scope.domains = Domains.query(function() {
-            $scope.domains_loaded = true;
-        });
-        $scope.deleted_domains = []
+        $scope.state = Domains.state;
+        $scope.domains = Domains.all;
 
         $scope.newDomainForm = {}
 
