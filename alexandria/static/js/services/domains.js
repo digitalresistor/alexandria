@@ -6,6 +6,14 @@ app.factory('DomainsFactory', ['$resource', function($resource) {
     });
 }]);
 
+app.factory('RecordsFactory', ['$resource', function($resource) {
+    return $resource('/domain/:domain_id/:id', { domain_id: '@domain_id', id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+}])
+
 app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
     function($rootScope, $log, $q, DomainsFactory) {
         var service = {};
