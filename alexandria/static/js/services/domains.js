@@ -36,7 +36,7 @@ app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
             }
         };
 
-        service.save = function(data, success, error) {
+        service.saveDomain = function(data, success, error) {
             DomainsFactory.save(data, function(value, responseHeader) {
                 service.all.push(value);
 
@@ -46,7 +46,7 @@ app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
             });
         }
 
-        service.delete = function(domain) {
+        service.deleteDomain = function(domain) {
             (function() {
                 var domain_id = domain.id;
 

@@ -33,7 +33,7 @@ app.controller('DomainsCtrl', ['$scope', '$log', 'Domains',
 
             $log.debug('Attempting to save domain');
 
-            Domains.save($scope.newDomainForm, function(value, responseHeader) {
+            Domains.saveDomain($scope.newDomainForm, function(value, responseHeader) {
                 $scope.newDomainForm = {};
                 $scope.newDomain.$setPristine();
             }, function(httpResponse) {
@@ -53,7 +53,7 @@ app.controller('DomainsCtrl', ['$scope', '$log', 'Domains',
         };
 
         $scope.deleteDomain = function(domain) {
-            Domains.delete(domain);
+            Domains.deleteDomain(domain);
         };
 
         $scope.modified = function() {
