@@ -2,14 +2,15 @@ import os
 import sys
 import transaction
 
-from sqlalchemy import engine_from_config
-
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
     )
 
-from ..models import * 
+from sqlalchemy import engine_from_config
+from sqlalchemy.orm import sessionmaker as sqla_sessionmaker
+
+from ..models import *
 
 def usage(argv):
     cmd = os.path.basename(argv[0])
@@ -23,9 +24,23 @@ def main(argv=sys.argv):
     config_uri = argv[1]
     setup_logging(config_uri)
     settings = get_appsettings(config_uri)
+
+    # Configure sqlalchemy engine
     engine = engine_from_config(settings, 'sqlalchemy.')
-    DBSession.configure(bind=engine)
+
+    # Create a sessionmaker
+    sessionmaker = sqla_sessionmaker()
+    sessionmaker.configure(bind=engine)
+
+    # Get us a dbsession
+    dbsession = sessionmaker()
+
+    # Register said dbsession against the transaction manager
+    zope.sqlalchemy.register(dbsession, transaction_manager=transaction.manager)
+
+    # Using the metadata create all objects
     Base.metadata.create_all(engine)
+
     with transaction.manager:
         u = User(email='example@example.com', credentials='testing')
-        DBSession.add(u)
+        dbsession.add(u)
