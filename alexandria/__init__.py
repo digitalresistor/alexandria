@@ -11,7 +11,6 @@ required_settings = [
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
-    config = Configurator(settings=settings)
 
     do_start = True
 
@@ -24,6 +23,7 @@ def main(global_config, **settings):
         log.error('Unable to start due to missing configuration')
         exit(-1)
 
+    config = Configurator(settings=settings)
     config.include('.models')
     config.include('.session')
     config.include('.security')
