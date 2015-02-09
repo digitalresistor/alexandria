@@ -23,7 +23,6 @@ from pyramid.security import (
 from webob.cookies import SignedCookieProfile as CookieHelper
 
 from .models import (
-        DBSession,
         User,
         UserTickets,
         )
@@ -203,7 +202,7 @@ class AuthPolicy(object):
         value['ticket'] = ticket = digestmethod(urandom(32)).hexdigest()
         value['tokens'] = tokens if tokens is not None else []
 
-        user = DBSession.query(User).filter(User.email == principal).first()
+        user = request.dbsession.query(User).filter(User.email == principal).first()
 
         if user is None:
             raise ValueError('Invalid principal provided')
@@ -228,7 +227,7 @@ class AuthPolicy(object):
 
         if user.ticket:
             debug and self._log('forgetting user: %s, removing ticket: %s' % (user.id, user.ticket.ticket), 'forget', request)
-            DBSession.delete(user.ticket)
+            request.dbsession.delete(user.ticket)
 
         return self.cookie.get_headers('', max_age=0)
 

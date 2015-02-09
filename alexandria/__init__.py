@@ -2,9 +2,6 @@ import logging
 log = logging.getLogger(__name__)
 
 from pyramid.config import Configurator
-from sqlalchemy import engine_from_config
-
-from .models import DBSession
 
 required_settings = [
         'pyramid.secret.session',
@@ -14,8 +11,6 @@ required_settings = [
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
-    engine = engine_from_config(settings, 'sqlalchemy.')
-    DBSession.configure(bind=engine)
     config = Configurator(settings=settings)
 
     do_start = True
@@ -29,9 +24,7 @@ def main(global_config, **settings):
         log.error('Unable to start due to missing configuration')
         exit(-1)
 
-    # Include the transaction manager
-    config.include('pyramid_tm')
-
+    config.include('.models')
     config.include('.session')
     config.include('.security')
     config.include('.renderer')

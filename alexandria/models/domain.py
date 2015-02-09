@@ -5,10 +5,7 @@ from pyramid.compat import (
         binary_type
         )
 
-from .meta import (
-        Base,
-        DBSession,
-        )
+from .meta import Base
 
 from sqlalchemy import (
         Column,
