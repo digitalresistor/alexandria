@@ -54,7 +54,8 @@ class Domain(object):
 
     @view_config()
     def info(self):
-        domain = m.DBSession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).filter(m.Domain.id == self.context.id).first()
+        dbsession = self.request.dbsession
+        domain = dbsession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).filter(m.Domain.id == self.context.id).first()
 
         if domain is None:
             raise HTTPNotFound()
@@ -64,13 +65,13 @@ class Domain(object):
     @view_config(request_method='DELETE')
     def delete(self):
         self.csrf_valid()
-
-        domain = m.DBSession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).filter(m.Domain.id == self.context.id).first()
+        dbsession = self.request.dbsession
+        domain = dbsession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).filter(m.Domain.id == self.context.id).first()
 
         if domain is None:
             raise HTTPNotFound()
 
-        m.DBSession.delete(domain)
+        dbsession.delete(domain)
 
         return {}
 

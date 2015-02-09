@@ -54,7 +54,8 @@ class Domains(object):
 
     @view_config()
     def info(self):
-        users_domains = m.DBSession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).all()
+        dbsession = self.request.dbsession
+        users_domains = dbsession.query(m.Domain).filter(m.Domain.owner_id == self.request.user.user.id).all()
 
         domains = []
 
@@ -66,6 +67,7 @@ class Domains(object):
     @view_config(request_method='POST')
     def save(self):
         self.csrf_valid()
+        dbsession = self.request.dbsession
 
         try:
             schema = s.DomainSchema.create_schema(self.request)
@@ -73,8 +75,8 @@ class Domains(object):
 
             domain = m.Domain(owner_id=self.request.user.user.id, **deserialized)
 
-            m.DBSession.add(domain)
-            m.DBSession.flush()
+            dbsession.add(domain)
+            dbsession.flush()
 
             response = HTTPSeeOther(location=self.request.route_url('main', traverse=('domain', domain.id)))
 

@@ -13,7 +13,7 @@ def _new_domain(node, kw):
         raise KeyError('Require bind: request')
 
     def new_domain(form, value):
-        d = m.DBSession.query(m.Domain).filter(m.Domain.domain == value['domain']).first()
+        d = request.dbsession.query(m.Domain).filter(m.Domain.domain == value['domain']).first()
 
         if d is not None:
             exc = colander.Invalid(form)
