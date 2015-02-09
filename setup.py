@@ -10,7 +10,7 @@ requires = [
         'pyramid',
         'SQLAlchemy',
         'psycopg2',
-        'transaction',
+        'transaction>=0.11',
         'pyramid_tm',
         'pyramid_debugtoolbar',
         'zope.sqlalchemy',
