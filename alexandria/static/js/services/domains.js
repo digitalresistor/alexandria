@@ -42,7 +42,7 @@ app.service('Domains', ['$rootScope', '$log', '$q', 'DomainsFactory',
 
                 success(value, responseHeader);
             }, function(httpResponse) {
-                error(httpResonse);
+                error(httpResponse);
             });
         }
 
