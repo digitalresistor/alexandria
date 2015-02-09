@@ -36,12 +36,6 @@ def includeme(config):
     config.set_authentication_policy(_authn_policy)
     config.set_authorization_policy(_authz_policy)
 
-    def RequestStorage(request):
-        class Storage(dict):
-            pass
-
-        return Storage()
-
-    config.add_request_method(RequestStorage, name='state', property=True, reify=True)
+    config.add_request_method(lambda _: dict(), name='state', property=True, reify=True)
     config.add_request_method(user, name='user', property=True, reify=True)
 
