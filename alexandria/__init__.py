@@ -41,8 +41,6 @@ def main(global_config, **settings):
             use_global_views=True
             )
 
-    # Scan the views sub-module
-    config.scan('.views')
 
     class ExplicitAcceptPredicate(object):
         def __init__(self, val, config):
@@ -57,6 +55,9 @@ def main(global_config, **settings):
             return self.val in [accept for accept in request.accept]
 
     config.add_view_predicate('explicit_accept', ExplicitAcceptPredicate)
+
+    # Scan the views sub-module
+    config.scan('.views')
 
     return config.make_wsgi_app()
 
