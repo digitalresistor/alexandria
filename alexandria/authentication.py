@@ -133,7 +133,7 @@ class AuthPolicy(object):
         if not ticket or not principal:
             return None
 
-        ticket = UserTickets.find_ticket_userid(ticket, principal)
+        ticket = UserTickets.find_ticket_userid(request.dbsession, ticket, principal)
 
         if ticket is None:
             self.debug and self._log('No ticket found', 'find_user_ticket', request)

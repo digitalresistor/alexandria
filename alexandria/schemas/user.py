@@ -13,7 +13,7 @@ def login_username_password(node, kw):
         raise KeyError('Require bind: request')
 
     def username_password(form, value):
-        user = User.validate_user_password(value['email'],
+        user = User.validate_user_password(request.dbsession, value['email'],
                 value['password'])
 
         if user is None:

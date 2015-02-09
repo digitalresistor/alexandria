@@ -2,7 +2,6 @@ import datetime
 
 from .meta import (
         Base,
-        DBSession,
         )
 
 from sqlalchemy import (
@@ -62,8 +61,8 @@ class User(Base):
         return manager.check(self.credentials, password)
 
     @classmethod
-    def validate_user_password(cls, email, password):
-        user = DBSession.query(cls).filter(cls.email == email.lower()).first()
+    def validate_user_password(cls, dbsession, email, password):
+        user = dbsession.query(cls).filter(cls.email == email.lower()).first()
 
         if user is not None:
             if user.check_password(password):
@@ -84,8 +83,8 @@ class UserTickets(Base):
     user = relationship("User", lazy="joined", backref='tickets')
 
     @classmethod
-    def find_ticket_userid(cls, ticket, userid):
-        return DBSession.query(cls).join(
+    def find_ticket_userid(cls, dbsession, ticket, userid):
+        return dbsession.query(cls).join(
                 User,
                 and_(
                     User.email == userid.lower(),
